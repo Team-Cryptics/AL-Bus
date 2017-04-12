@@ -4,8 +4,17 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <TextView
-        android:text="Scan"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+    <com.example.punyaaachman.albus.camera.CameraSourcePreview
+        android:id="@+id/preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.example.punyaaachman.albus.camera.GraphicOverlay
+            android:id="@+id/graphicOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.example.punyaaachman.albus.camera.CameraSourcePreview>
 
 </LinearLayout>
