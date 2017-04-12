@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "355779658371",
+    "firebase_url": "https://albus-19971.firebaseio.com",
+    "project_id": "albus-19971",
+    "storage_bucket": "albus-19971.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:355779658371:android:8c3fa9075195dcdb",
+        "android_client_info": {
+          "package_name": "com.example.punyaaachman.albus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "355779658371-0ot96qo7mk4unnpv7v4lvt0k7bcdc15v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.punyaaachman.albus",
+            "certificate_hash": "51f821679820e34b7510791417f6edc640fda5b2"
+          }
+        },
+        {
+          "client_id": "355779658371-b5tgq1jvomo1ai9i9mug1ob4hr95i0pf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTOFU8cjyhfufwU7jwJjxzsjQ0hGCP_14"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "355779658371-b5tgq1jvomo1ai9i9mug1ob4hr95i0pf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

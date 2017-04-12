@@ -22,12 +22,18 @@
 
         <activity android:name=".SplashscreenActivity">
 
+
+            android:theme="@style/Theme.Design.NoActionBar">
+
         </activity>
         <activity android:name=".LoginActivity">
         </activity>
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home">
+        </activity>
+        <activity
+            android:name=".RegisterActivity">
         </activity>
         <activity
             android:name=".MainActivity"
