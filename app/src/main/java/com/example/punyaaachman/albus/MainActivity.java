@@ -106,6 +106,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                   //  startActivity(new Intent(MainActivity.this,SelectStationActivity.class));
                    statusMessage.setText(R.string.barcode_success);
                     barcodeValue.setText(barcode.displayValue);
+                    Log.i("TAG",barcode.displayValue);
 
                     Intent intent = new Intent(getApplicationContext(),SelectStationActivity.class);
                     startActivity(intent);
