@@ -32,13 +32,11 @@ public class ScanFragment extends Fragment
     @Nullable @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-<<<<<<< HEAD
-        return inflater.inflate(R.layout.fragment_scan, container, false);
-=======
+
+
         View rootView = inflater.inflate(R.layout.fragment_scan, container, false);
         setAlertDialog();
         return rootView;
->>>>>>> f4e3f9dbf1acb01e8699ea0849c50b8611e2d271
     }
 
     void setAlertDialog() {
