@@ -23,14 +23,22 @@ public class SelectStationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_station);
 
         Intent intent = getIntent();
-        String msg  = intent.getStringExtra("msg");
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        String msg  = intent.getStringExtra("MSG");
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
         stops = new ArrayList<>();
+        int a = Integer.parseInt(msg);
+        a++;
+        switch (a){
+            case 1: stops.add("District Centre, Janakpuir");
+            case 2: stops.add("Peeragarhi");
+            case 3: stops.add("Sachdeva");
+            case 4:stops.add("DTU");
 
-        stops.add(0,"Rohini");
+        }
+       /* stops.add(0,"Rohini");
         stops.add(1,"Janakpuri");
         stops.add(2,"Bawana");
-        stops.add(3,"Rajouri");
+        stops.add(3,"Rajouri"); */
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         busStopAdapter = new BusStopAdapter(stops,this);

@@ -83,6 +83,7 @@ public class ScanFragment extends Fragment
                     Log.i("TAG",barcode.displayValue);
 
                     Intent intent = new Intent(getContext(),SelectStationActivity.class);
+                    intent.putExtra("MSG",barcode.displayValue);
                     startActivity(intent);
 
 
