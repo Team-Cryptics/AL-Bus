@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Albus</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_scan">Scan QR Code</string>
+    <string name="title_wallet">Wallet</string>
+</resources>
