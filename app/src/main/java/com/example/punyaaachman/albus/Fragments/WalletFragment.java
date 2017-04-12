@@ -18,9 +18,7 @@ public class WalletFragment extends Fragment
     @Nullable @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        View rootView = inflater.inflate(R.layout.fragment_wallet, container, false);
-
-        return rootView;
+       return inflater.inflate(R.layout.fragment_wallet, container, false);
     }
 }
 

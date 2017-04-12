@@ -18,8 +18,6 @@ public class ScanFragment extends Fragment
     @Nullable @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        View rootView = inflater.inflate(R.layout.fragment_scan, container, false);
-
-        return rootView;
+        return inflater.inflate(R.layout.fragment_scan, container, false);
     }
 }

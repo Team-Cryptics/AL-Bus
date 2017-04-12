@@ -24,8 +24,13 @@
             android:name=".HomeActivity"
             android:label="@string/title_activity_home">
         </activity>
-        <activity
-            android:name=".RegisterActivity">
+        <activity android:name=".RegisterActivity">
+        </activity>
+        <activity android:name=".CardsActivity">
+        </activity>
+        <activity android:name=".TripsActivity">
+        </activity>
+        <activity android:name=".HelpActivity">
         </activity>
     </application>
 
