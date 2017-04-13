@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.punyaaachman.albus">
+    package="com.example.punyaaachman.albus">
 
     <uses-feature android:name="android.hardware.camera" />
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -20,9 +21,18 @@
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDX-TtDU9nSjnzElGgSxDo0bf8AQ_zPqR8" />
 
-        <activity android:name=".SplashscreenActivity">
+        <activity
+            android:name=".SplashscreenActivity"
+            android:theme="@style/Theme.Design.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
             <action android:name="android.intent.action.MAIN"/>
 
@@ -37,23 +47,21 @@
             android:label="@string/title_activity_home">
 
         </activity>
-        <activity android:name=".RegisterActivity">
-        </activity>
-        <activity android:name=".CardsActivity">
-        </activity>
-        <activity android:name=".TripsActivity">
-        </activity>
-        <activity android:name=".HelpActivity">
-        </activity>
+        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".CardsActivity"></activity>
+        <activity android:name=".TripsActivity"></activity>
+        <activity android:name=".HelpActivity"></activity>
         <activity
             android:name=".MainActivity"
-            android:label="Bus Scanner">
-
-            </activity>
+            android:label="Bus Scanner"></activity>
         <activity
             android:name=".BarcodeCaptureActivity"
             android:label="Read Barcode" />
-        <activity android:name=".SelectStationActivity"></activity>
+        <activity android:name=".SelectStationActivity" />
+        <activity android:name=".TicketActivity">
+
+
+        </activity>
     </application>
 
 </manifest>
