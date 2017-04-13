@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.example.punyaaachman.albus.POJO.GlobalVariables;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,12 +29,13 @@ public class SelectStationActivity extends AppCompatActivity {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
         stops = new ArrayList<>();
         int a = Integer.parseInt(msg);
+        GlobalVariables.begin = a;
         a++;
         switch (a){
-            case 1: stops.add("District Centre, Janakpuir");
+            case 1: stops.add("District Centre, Janakpuri");
             case 2: stops.add("Peeragarhi");
-            case 3: stops.add("Sachdeva");
-            case 4:stops.add("DTU");
+            case 3: stops.add("Sachdeva School,Rohini");
+            case 4: stops.add("DTU, Bawana Road");
 
         }
        /* stops.add(0,"Rohini");

@@ -17,6 +17,8 @@
     <string name="barcode_failure">No barcode captured</string>
     <string name="barcode_error">"Error reading barcode: %1$s"</string>
     <string name="auto_capture">Auto Capture</string>
+    <string name="sign_up_here"><u>Sign up here</u></string>
+    <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
 
     <string name="auth_failed">Failed! Try again</string>
 </resources>

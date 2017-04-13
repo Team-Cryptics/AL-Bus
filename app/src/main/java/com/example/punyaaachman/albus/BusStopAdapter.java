@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.example.punyaaachman.albus.POJO.GlobalVariables;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,6 +83,7 @@ public class BusStopAdapter extends RecyclerView.Adapter<BusStopAdapter.BusStopH
         }
 
         void setAlertDialog() {
+
             alertDialog = new AlertDialog.Builder(c).create();
             alertDialog.setTitle("Select Destination");
             alertDialog.setMessage("Select "+ stopNameClicked +" as destination?");
@@ -88,7 +91,14 @@ public class BusStopAdapter extends RecyclerView.Adapter<BusStopAdapter.BusStopH
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
+                            switch (stopNameClicked) {
+                                case "District Centre, Janakpuri": GlobalVariables.dest=1;
+                                case "Peeragarhi": GlobalVariables.dest=2;
+                                case "Sachdeva School,Rohini": GlobalVariables.dest=3;
+                                case "DTU, Bawana Road": GlobalVariables.dest=4;
+                            }
                             //SEND INTENT
+
                         }
                     });
 
