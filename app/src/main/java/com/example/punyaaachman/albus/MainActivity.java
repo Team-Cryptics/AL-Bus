@@ -51,8 +51,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     public void onClick(DialogInterface dialog, int which) {
                         useFlash = true;
                         dialog.dismiss();
-                        Intent intent = new Intent(getApplicationContext(), BarcodeCaptureActivity.class);
-                        intent.putExtra(BarcodeCaptureActivity.UseFlash, useFlash);
+                        Intent intent = new Intent(getApplicationContext(), BarcodeCaptureFragment.class);
+                        intent.putExtra(BarcodeCaptureFragment.UseFlash, useFlash);
                         startActivityForResult(intent, RC_BARCODE_CAPTURE);
                         //SEND INTENT
                     }
@@ -63,8 +63,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     public void onClick(DialogInterface dialog, int which) {
                         useFlash = false;
                         dialog.dismiss();
-                        Intent intent = new Intent(getApplicationContext(), BarcodeCaptureActivity.class);
-                        intent.putExtra(BarcodeCaptureActivity.UseFlash, useFlash);
+                        Intent intent = new Intent(getApplicationContext(), BarcodeCaptureFragment.class);
+                        intent.putExtra(BarcodeCaptureFragment.UseFlash, useFlash);
                         startActivityForResult(intent, RC_BARCODE_CAPTURE);
 
 
@@ -100,7 +100,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         if (requestCode == RC_BARCODE_CAPTURE) {
             if (resultCode == CommonStatusCodes.SUCCESS) {
                 if (data != null) {
-                    Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
+                    Barcode barcode = data.getParcelableExtra(BarcodeCaptureFragment.BarcodeObject);
                     Log.d(TAG, "Barcode read: " + barcode.displayValue);
 
                   //  startActivity(new Intent(MainActivity.this,SelectStationActivity.class));
