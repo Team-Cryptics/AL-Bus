@@ -67,7 +67,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
 
     public static final String BarcodeObject = "Barcode";
 
-    private CameraSource mCameraSource;
+     private CameraSource mCameraSource;
     private CameraSourcePreview mPreview;
     private GraphicOverlay<BarcodeGraphic> mGraphicOverlay;
 
