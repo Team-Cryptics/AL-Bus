@@ -34,33 +34,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <action android:name="android.intent.action.MAIN"/>
-
-            <category android:name="android.intent.category.LAUNCHER"/>
-            android:theme="@style/Theme.Design.NoActionBar">
-
         </activity>
-        <activity android:name=".LoginActivity">
-        </activity>
+        <activity android:name=".LoginActivity"></activity>
         <activity
             android:name=".HomeActivity"
-            android:label="@string/title_activity_home">
-
-        </activity>
+            android:label="@string/title_activity_home"></activity>
         <activity android:name=".RegisterActivity"></activity>
         <activity android:name=".CardsActivity"></activity>
         <activity android:name=".TripsActivity"></activity>
         <activity android:name=".HelpActivity"></activity>
-        <activity
-            android:name=".MainActivity"
-            android:label="Bus Scanner"></activity>
-        <activity
-            android:name=".BarcodeCaptureActivity"
-            android:label="Read Barcode" />
         <activity android:name=".SelectStationActivity" />
         <activity android:name=".TicketActivity">
-
-
         </activity>
     </application>
 

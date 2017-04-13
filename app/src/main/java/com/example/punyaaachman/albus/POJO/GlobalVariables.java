@@ -7,4 +7,5 @@ package com.example.punyaaachman.albus.POJO;
 public class GlobalVariables {
     public static int dest;
     public static int begin;
+    public static boolean useFlash;
 }
