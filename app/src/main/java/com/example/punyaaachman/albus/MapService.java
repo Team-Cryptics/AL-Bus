@@ -33,11 +33,20 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+
+import android.app.Service;
+import android.content.Intent;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
+import android.widget.Toast;
+
+
 /**
  * Created by SUPERUSER on 13-04-2017.
  */
 
 public class MapService extends Service {
+
 
     MapInterface client;
     Double lat, lon;
@@ -57,6 +66,7 @@ public class MapService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         // Let it continue running until it is stopped.
         Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();
+
         stops_latlong = new LinkedHashMap<>();
         stops_latlong.put("0", "28.6098,77.1002");
         stops_latlong.put("1", "28.6304,77.0798");
@@ -94,6 +104,7 @@ public class MapService extends Service {
         }
         locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER, 45000, 0, listener);
 
+
         return START_STICKY;
     }
 
@@ -102,6 +113,7 @@ public class MapService extends Service {
         super.onDestroy();
         Toast.makeText(this, "Service Destroyed", Toast.LENGTH_LONG).show();
     }
+
 
 
     private class OurListener implements LocationListener {
@@ -194,5 +206,6 @@ public class MapService extends Service {
 
         }
     }
+
 }
 

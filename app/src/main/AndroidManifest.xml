@@ -4,10 +4,13 @@
 
     <uses-feature android:name="android.hardware.camera" />
 
+
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -36,19 +39,18 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity" />
         <activity
             android:name=".HomeActivity"
-            android:label="@string/title_activity_home"></activity>
-        <activity android:name=".RegisterActivity"></activity>
-        <activity android:name=".CardsActivity"></activity>
-        <activity android:name=".TripsActivity"></activity>
-        <activity android:name=".HelpActivity"></activity>
+            android:label="@string/title_activity_home" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".CardsActivity" />
+        <activity android:name=".TripsActivity" />
+        <activity android:name=".HelpActivity" />
         <activity android:name=".SelectStationActivity" />
-        <activity android:name=".TicketActivity">
-        </activity>
+        <activity android:name=".TicketActivity" />
+        <activity android:name=".PayActivity"></activity>
     </application>
 
 </manifest>

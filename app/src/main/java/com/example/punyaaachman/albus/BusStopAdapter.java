@@ -5,6 +5,7 @@ package com.example.punyaaachman.albus;
  */
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -98,7 +99,6 @@ public class BusStopAdapter extends RecyclerView.Adapter<BusStopAdapter.BusStopH
                                 case "DTU, Bawana Road": GlobalVariables.dest=4;
                             }
                             //SEND INTENT
-
                         }
                     });
 
