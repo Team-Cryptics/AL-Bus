@@ -37,7 +37,6 @@ public class ScanFragment extends Fragment
         View rootView = inflater.inflate(R.layout.fragment_scan, container, false);
         setAlertDialog();
         return rootView;
-
     }
 
     void setAlertDialog() {
