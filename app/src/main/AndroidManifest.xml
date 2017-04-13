@@ -43,16 +43,8 @@
         <activity android:name=".CardsActivity"></activity>
         <activity android:name=".TripsActivity"></activity>
         <activity android:name=".HelpActivity"></activity>
-        <activity
-            android:name=".MainActivity"
-            android:label="Bus Scanner"></activity>
-        <activity
-            android:name=".BarcodeCaptureFragment"
-            android:label="Read Barcode" />
         <activity android:name=".SelectStationActivity" />
         <activity android:name=".TicketActivity">
-
-
         </activity>
     </application>
 

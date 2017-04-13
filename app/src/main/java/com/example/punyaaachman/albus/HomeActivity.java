@@ -145,7 +145,6 @@ public class HomeActivity extends AppCompatActivity
                     Barcode barcode = data.getParcelableExtra(BarcodeCaptureFragment.BarcodeObject);
                     Log.d(TAG, "Barcode read: " + barcode.displayValue);
 
-                    //  startActivity(new Intent(MainActivity.this,SelectStationActivity.class));
                     //                statusMessage.setText(R.string.barcode_success);
                     //              barcodeValue.setText(barcode.displayValue);
                     Log.i("TAG",barcode.displayValue);

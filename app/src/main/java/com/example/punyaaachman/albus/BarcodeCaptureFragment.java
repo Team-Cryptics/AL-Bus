@@ -357,7 +357,6 @@ public final class BarcodeCaptureFragment extends Fragment implements BarcodeGra
 //                    Barcode barcode = data.getParcelableExtra(BarcodeCaptureFragment.BarcodeObject);
             Log.d(TAG, "Barcode read: " + data.displayValue);
 
-            //  startActivity(new Intent(MainActivity.this,SelectStationActivity.class));
             //                statusMessage.setText(R.string.barcode_success);
             //              barcodeValue.setText(barcode.displayValue);
             Log.i("TAG",data.displayValue);
