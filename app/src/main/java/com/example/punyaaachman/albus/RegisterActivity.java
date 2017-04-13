@@ -123,8 +123,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 } else {
 
                                     User user = new User(email,fname,lname,mno);
-                                    List<Trips> tripsList = new ArrayList<>();
-                                    Profile profile = new Profile(user,tripsList);
+                                    Profile profile = new Profile(user);
                                     ref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(profile);
                                     startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                                     finish();

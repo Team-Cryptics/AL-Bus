@@ -364,6 +364,7 @@ public final class BarcodeCaptureFragment extends Fragment implements BarcodeGra
             Intent intent = new Intent(getActivity(),SelectStationActivity.class);
             intent.putExtra("MSG",data.displayValue);
             startActivity(intent);
+           // getActivity().finish();
 
         } else {
             //            statusMessage.setText(R.string.barcode_failure);

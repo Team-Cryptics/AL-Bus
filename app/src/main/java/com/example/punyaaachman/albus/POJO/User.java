@@ -9,7 +9,27 @@ public class User {
         String firstName,lastName,number,email;
         double balance;
 
-        public User() {
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public User() {
 
         }
 

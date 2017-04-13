@@ -8,12 +8,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.example.punyaaachman.albus.POJO.GlobalVariables;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Date;
 
 public class TicketActivity extends AppCompatActivity {
+    TextView tvFrom, tvTo, tvAmount;
 
     Button btScreenshot;
     @Override
@@ -29,7 +33,18 @@ public class TicketActivity extends AppCompatActivity {
             }
         });
 
+        tvFrom = (TextView) findViewById(R.id.tvFromR);
+        tvTo = (TextView) findViewById(R.id.tvToR);
+        tvAmount = (TextView) findViewById(R.id.tvAmountR);
+
+        tvFrom.setText(GlobalVariables.b);
+        tvTo.setText(GlobalVariables.d);
+        tvAmount.setText(String.valueOf(GlobalVariables.price));
+
+        startService(new Intent(TicketActivity.this,MapService.class));
+
     }
+
     public void startService(View view) {
         startService(new Intent(getBaseContext(), MapService.class));
     }

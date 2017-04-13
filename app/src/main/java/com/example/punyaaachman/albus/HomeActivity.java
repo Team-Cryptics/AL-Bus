@@ -3,6 +3,7 @@ package com.example.punyaaachman.albus;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -19,17 +20,32 @@ import android.widget.Toast;
 import com.example.punyaaachman.albus.Fragments.ProfileFragment;
 import com.example.punyaaachman.albus.Fragments.WalletFragment;
 import com.example.punyaaachman.albus.POJO.GlobalVariables;
+import com.example.punyaaachman.albus.POJO.Profile;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import static com.example.punyaaachman.albus.POJO.GlobalVariables.profile;
 
 public class HomeActivity extends AppCompatActivity
 {
     private FirebaseAuth mAuth;
+    FirebaseAuth.AuthStateListener mAuthStateListener;
+
+    TextView tvName, tvNumber, tvProfileBalanced, tvImage;
 
     private static final int RC_BARCODE_CAPTURE = 9001;
     private static final String TAG = "BarcodeMain";
     private AlertDialog alertDialog;
+    FirebaseDatabase firebase;
+    DatabaseReference dref;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener()
@@ -37,18 +53,88 @@ public class HomeActivity extends AppCompatActivity
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item)
-        {
+        {   firebase=FirebaseDatabase.getInstance();
+            dref=firebase.getReference();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
             switch (item.getItemId())
             {
                 case R.id.navigation_profile:
                     fragmentTransaction.replace(R.id.content, new ProfileFragment()).commit();
+
+
+
+                        dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                profile = dataSnapshot.getValue(Profile.class);
+
+
+                                Log.i("TAG", profile.getUser().getEmail());
+
+                                tvImage = (TextView) findViewById(R.id.tvImage);
+                                tvName = (TextView) findViewById(R.id.tvName);
+                                tvNumber = (TextView) findViewById(R.id.tvNumber);
+                                tvProfileBalanced = (TextView) findViewById(R.id.tvBalanceProfile);
+                                tvName.setText(profile.getUser().getFirstName() + " " + profile.getUser().getLastName());
+                                tvNumber.setText(profile.getUser().getNumber());
+                                tvProfileBalanced.setText(Double.toString(profile.getUser().getBalance()));
+                                tvImage.setText(Character.toString(profile.getUser().getFirstName().charAt(0)) + Character.toString(profile.getUser().getLastName().charAt(0)));
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
                     return true;
                 case R.id.navigation_scan:
                     setAlertDialog();
+                    if(profile!=null) {
+                        dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                profile = dataSnapshot.getValue(Profile.class);
+
+
+                                    Log.i("TAG", profile.getUser().getEmail());
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
                     return true;
                 case R.id.navigation_wallet:
                     fragmentTransaction.replace(R.id.content, new WalletFragment()).commit();
+                   if(profile!=null) {
+                        dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                profile = dataSnapshot.getValue(Profile.class);
+
+
+                                    Log.i("TAG", profile.getUser().getEmail());
+                                    ((TextView) findViewById(R.id.tvBalanceWallet)).setText("Rs. " + profile.getUser().getBalance());
+
+                                findViewById(R.id.btnAddMoney).setVisibility(View.VISIBLE);
+                                findViewById(R.id.pbAddMoney).setVisibility(View.GONE);
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
                     return true;
             }
             return false;
@@ -62,11 +148,30 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        firebase=FirebaseDatabase.getInstance();
+        dref=firebase.getReference();
+
         mAuth = FirebaseAuth.getInstance();
+
+        mAuthStateListener= new FirebaseAuth.AuthStateListener() {
+             @Override
+          public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                 FirebaseUser user = firebaseAuth.getCurrentUser();
+                 if (user == null) {
+                     // user auth state is changed - user is null
+                     // launch login activity
+                     startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                     finish();
+                 }
+             }
+     };
+
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        navigation.setSelectedItemId(R.id.navigation_scan);
+        navigation.setSelectedItemId(R.id.navigation_profile);
+
+
     }
     void setAlertDialog() {
         alertDialog = new AlertDialog.Builder(this).create();
@@ -113,9 +218,9 @@ public class HomeActivity extends AppCompatActivity
                 break;
             case R.id.cvSignOut:
                 mAuth.signOut();
-                startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-                finish();
+                mAuth.addAuthStateListener(mAuthStateListener);
                 break;
+
             case R.id.btnAddMoney:
                 if (((EditText) findViewById(R.id.etMoney)).getText().toString().isEmpty()) {
                     Toast.makeText(HomeActivity.this, "Invalid Amount", Toast.LENGTH_SHORT).show();
@@ -124,19 +229,30 @@ public class HomeActivity extends AppCompatActivity
                     findViewById(R.id.pbAddMoney).setVisibility(View.VISIBLE);
 
                     //add money
-                    (new Handler()).postDelayed(new Runnable()
-                    {
-                        @Override public void run()
-                        {
-                            findViewById(R.id.btnAddMoney).setVisibility(View.VISIBLE);
-                            findViewById(R.id.pbAddMoney).setVisibility(View.GONE);
-                            Toast.makeText(HomeActivity.this, "Money Successfully Added", Toast.LENGTH_SHORT).show();
-                        }
-                    },1000);
+                    addMoney();
+
+                    findViewById(R.id.btnAddMoney).setVisibility(View.VISIBLE);
+                    findViewById(R.id.pbAddMoney).setVisibility(View.GONE);
+                    Toast.makeText(HomeActivity.this, "Money Successfully Added", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
     }
+
+    public void addMoney() {
+      //  profile.getUser().setBalance(profile.getUser().getBalance() + Double.valueOf(((EditText) findViewById(R.id.etMoney)).getText().toString()));
+
+        double a = profile.getUser().getBalance();
+        String b = ((EditText)findViewById(R.id.etMoney)).getText().toString();
+        double c= Double.parseDouble(b);
+        double d = a+c;
+        profile.getUser().setBalance(d);
+        ((EditText) findViewById(R.id.etMoney)).setText(" ");
+        ((TextView)findViewById(R.id.tvBalanceWallet)).setText(Double.toString(profile.getUser().getBalance()));
+
+
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RC_BARCODE_CAPTURE) {
@@ -166,4 +282,7 @@ public class HomeActivity extends AppCompatActivity
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
+
+//    public class Work extends AsyncTask<Voi>
+
 }
