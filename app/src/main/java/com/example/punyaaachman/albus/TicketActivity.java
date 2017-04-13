@@ -30,7 +30,14 @@ public class TicketActivity extends AppCompatActivity {
         });
 
     }
+    public void startService(View view) {
+        startService(new Intent(getBaseContext(), MapService.class));
+    }
 
+    // Method to stop the service
+    public void stopService(View view) {
+        stopService(new Intent(getBaseContext(), MapService.class));
+    }
 
 
     private void takeScreenshot() {

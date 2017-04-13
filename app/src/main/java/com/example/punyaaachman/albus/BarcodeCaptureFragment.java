@@ -71,7 +71,7 @@ public final class BarcodeCaptureFragment extends Fragment implements BarcodeGra
 
     public static final String BarcodeObject = "Barcode";
 
-    private CameraSource mCameraSource;
+     private CameraSource mCameraSource;
     private CameraSourcePreview mPreview;
     private GraphicOverlay<BarcodeGraphic> mGraphicOverlay;
 
