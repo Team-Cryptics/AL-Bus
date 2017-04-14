@@ -1,4 +1,4 @@
-package com.example.punyaaachman.albus;
+package com.example.punyaaachman.albus.Activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.punyaaachman.albus.POJO.GlobalVariables;
+import com.example.punyaaachman.albus.R;
 
 import java.io.File;
 import java.io.FileOutputStream;

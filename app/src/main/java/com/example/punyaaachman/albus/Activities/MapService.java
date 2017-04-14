@@ -1,4 +1,4 @@
-package com.example.punyaaachman.albus;
+package com.example.punyaaachman.albus.Activities;
 
 import android.*;
 import android.app.Service;

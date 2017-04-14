@@ -12,4 +12,5 @@ public class GlobalVariables {
 
     public static String d,b;
     public static double price;
+    public static boolean isProfile;
 }

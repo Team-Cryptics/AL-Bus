@@ -1,4 +1,4 @@
-package com.example.punyaaachman.albus;
+package com.example.punyaaachman.albus.Activities;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.punyaaachman.albus.POJO.GlobalVariables;
+import com.example.punyaaachman.albus.R;
 
 import java.util.ArrayList;
 import java.util.List;

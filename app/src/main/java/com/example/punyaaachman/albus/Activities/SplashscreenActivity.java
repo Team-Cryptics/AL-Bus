@@ -1,21 +1,13 @@
-package com.example.punyaaachman.albus;
+package com.example.punyaaachman.albus.Activities;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.punyaaachman.albus.POJO.Profile;
 import com.example.punyaaachman.albus.POJO.User;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.example.punyaaachman.albus.R;
 
 import static com.example.punyaaachman.albus.POJO.GlobalVariables.profile;
 

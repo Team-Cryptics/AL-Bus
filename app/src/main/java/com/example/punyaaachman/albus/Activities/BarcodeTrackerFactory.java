@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.punyaaachman.albus;
+package com.example.punyaaachman.albus.Activities;
 
 import com.example.punyaaachman.albus.camera.GraphicOverlay;
 import com.google.android.gms.vision.MultiProcessor;

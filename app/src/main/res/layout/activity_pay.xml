@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.punyaaachman.albus.PayActivity"
+    tools:context="com.example.punyaaachman.albus.Activities.PayActivity"
     android:weightSum="1"
     android:orientation="vertical"
     android:padding="16dp">

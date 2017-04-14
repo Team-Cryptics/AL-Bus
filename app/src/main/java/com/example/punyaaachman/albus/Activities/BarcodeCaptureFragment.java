@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.punyaaachman.albus;
+package com.example.punyaaachman.albus.Activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -44,6 +44,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.punyaaachman.albus.POJO.GlobalVariables;
+import com.example.punyaaachman.albus.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.CommonStatusCodes;

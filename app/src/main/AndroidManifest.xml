@@ -32,7 +32,7 @@
             android:value="AIzaSyDX-TtDU9nSjnzElGgSxDo0bf8AQ_zPqR8" />
 
         <activity
-            android:name=".SplashscreenActivity"
+            android:name=".Activities.SplashscreenActivity"
             android:theme="@style/Theme.Design.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,17 +40,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".Activities.LoginActivity" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".Activities.HomeActivity"
             android:label="@string/title_activity_home" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".CardsActivity" />
-        <activity android:name=".TripsActivity" />
-        <activity android:name=".HelpActivity" />
-        <activity android:name=".SelectStationActivity" />
-        <activity android:name=".TicketActivity" />
-        <activity android:name=".PayActivity"></activity>
+        <activity android:name=".Activities.RegisterActivity" />
+        <activity android:name=".Activities.CardsActivity" />
+        <activity android:name=".Activities.TripsActivity" />
+        <activity android:name=".Activities.HelpActivity" />
+        <activity android:name=".Activities.SelectStationActivity" />
+        <activity android:name=".Activities.TicketActivity" />
+        <activity android:name=".Activities.PayActivity"></activity>
     </application>
 
 </manifest>
