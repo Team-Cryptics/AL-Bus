@@ -12,7 +12,8 @@ import java.util.List;
         User user;
 
     public Profile() {
-
+        this.tripsList=null;
+        user=null;
     }
 
     public Profile(User user,List<Trips> tripsList) {

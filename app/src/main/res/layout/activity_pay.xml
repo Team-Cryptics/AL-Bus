@@ -83,7 +83,7 @@
             android:textSize="30sp"/>
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="71dp"
             android:layout_weight="0.19"
