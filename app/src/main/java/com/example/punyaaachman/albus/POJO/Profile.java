@@ -1,5 +1,6 @@
 package com.example.punyaaachman.albus.POJO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,20 +9,29 @@ import java.util.List;
 
     public class Profile {
 
-        List<Trips> tripsList;
+        ArrayList<Trips> tripsList;
         User user;
 
-    public Profile() {
-        this.tripsList=null;
-        user=null;
+    public void setTripsList(ArrayList<Trips> tripsList) {
+        this.tripsList = tripsList;
     }
 
-    public Profile(User user,List<Trips> tripsList) {
-        this.tripsList = tripsList;
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public List<Trips> getTripsList() {
+    public Profile() {
+        user= null;
+        tripsList=null;
+
+    }
+
+    public Profile(User user) {
+        tripsList = new ArrayList<>();
+        this.user = user;
+    }
+
+    public ArrayList<Trips> getTripsList() {
         return tripsList;
     }
 

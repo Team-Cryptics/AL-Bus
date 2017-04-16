@@ -6,8 +6,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.punyaaachman.albus.R;
+
+import static com.example.punyaaachman.albus.POJO.GlobalVariables.profile;
 
 /**
  * Created by Punya Aachman on 12-Apr-17.
@@ -15,9 +18,12 @@ import com.example.punyaaachman.albus.R;
 
 public class ProfileFragment extends Fragment
 {
+    TextView tvName, tvNumber, tvProfileBalanced, tvImage;
     @Nullable @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        return rootView;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.punyaaachman.albus;
+package com.example.punyaaachman.albus.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,11 +13,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.punyaaachman.albus.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
 
 
 public class LoginActivity extends AppCompatActivity{
@@ -28,9 +28,15 @@ public class LoginActivity extends AppCompatActivity{
     private TextView tv1;
     private Button btnLogin;
 
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -38,8 +44,10 @@ public class LoginActivity extends AppCompatActivity{
         if (auth.getCurrentUser() != null) {
             // TO USE
             //auth.signOut();
+
             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
             finish();
+
         }
 
         // set the view now
@@ -106,6 +114,7 @@ public class LoginActivity extends AppCompatActivity{
         tv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
             }
         });

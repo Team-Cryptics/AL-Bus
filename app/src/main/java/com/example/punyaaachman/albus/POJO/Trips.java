@@ -10,7 +10,10 @@ public class Trips {
     Double pay;
 
     public Trips(){
-
+        start=null;
+        end=null;
+        tripId=null;
+        pay=0.0;
     }
 
     public Trips(String start, String end, Double pay) {
