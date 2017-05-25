@@ -59,6 +59,7 @@ public class MapService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
+        Log.i("TAG","Service Bind");
         return null;
     }
 
@@ -66,7 +67,7 @@ public class MapService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         // Let it continue running until it is stopped.
         Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();
-
+        Log.i("TAG","Service Started");
         stops_latlong = new LinkedHashMap<>();
         stops_latlong.put("0", "28.6098,77.1002");
         stops_latlong.put("1", "28.6304,77.0798");
@@ -102,7 +103,7 @@ public class MapService extends Service {
             // for ActivityCompat#requestPermissions for more details.
             Toast.makeText(this, "Please enable permissions", Toast.LENGTH_SHORT).show();
         }
-        locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER, 45000, 0, listener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, listener);
 
 
         return START_STICKY;
@@ -111,6 +112,7 @@ public class MapService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Log.i("TAG","Service Stopped");
         Toast.makeText(this, "Service Destroyed", Toast.LENGTH_LONG).show();
     }
 
@@ -123,6 +125,7 @@ public class MapService extends Service {
             lat= location.getLatitude();
             lon=location.getLongitude();
 
+            Log.i("TAG","Service - location listener");
             Log.i("TAG",lat+" "+lon+" ");
 
             String origin = lat+","+lon; //CURRENT LOCATION OF THE BUS
