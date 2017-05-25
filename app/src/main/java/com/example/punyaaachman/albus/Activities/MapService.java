@@ -187,8 +187,13 @@ public class MapService extends Service {
                         Toast.makeText(getApplicationContext(), toSpeak,Toast.LENGTH_SHORT).show();
                         textToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
 
-
+                        if(stopDistance==0){
+                            String reached ="Kindly ensure you board off at your destination";
+                            textToSpeech.speak(reached, TextToSpeech.QUEUE_FLUSH, null);
+                        }
                     }
+
+
                 }
 
                 @Override
