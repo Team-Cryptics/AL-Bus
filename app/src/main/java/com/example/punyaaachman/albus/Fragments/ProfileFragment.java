@@ -18,7 +18,7 @@ import static com.example.punyaaachman.albus.POJO.GlobalVariables.profile;
 
 public class ProfileFragment extends Fragment
 {
-    TextView tvName, tvNumber, tvProfileBalanced, tvImage;
+
     @Nullable @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {

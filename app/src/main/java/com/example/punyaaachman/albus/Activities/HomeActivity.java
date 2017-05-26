@@ -46,6 +46,37 @@ public class HomeActivity extends AppCompatActivity
     DatabaseReference dref;
 
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
+
+        firebase=FirebaseDatabase.getInstance();
+        dref=firebase.getReference();
+
+        mAuth = FirebaseAuth.getInstance();
+
+        mAuthStateListener= new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user == null) {
+                    // user auth state is changed - user is null
+                    // launch login activity
+                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                    finish();
+                }
+            }
+        };
+
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.setSelectedItemId(R.id.navigation_profile);
+
+
+    }
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener()
     {
@@ -61,13 +92,14 @@ public class HomeActivity extends AppCompatActivity
                     fragmentTransaction.replace(R.id.content, new ProfileFragment(), "p").commit();
                     GlobalVariables.isProfile = true;
 
-                    dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(profile);
+                    //??
+                   // dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(profile);
+
                         dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                profile = dataSnapshot.getValue(Profile.class);
-
+                                 profile = dataSnapshot.getValue(Profile.class);
 
                                 Log.i("TAG", profile.getUser().getEmail());
 
@@ -148,37 +180,7 @@ public class HomeActivity extends AppCompatActivity
 
     };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
 
-        firebase=FirebaseDatabase.getInstance();
-        dref=firebase.getReference();
-
-        mAuth = FirebaseAuth.getInstance();
-
-        mAuthStateListener= new FirebaseAuth.AuthStateListener() {
-             @Override
-          public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                 if (user == null) {
-                     // user auth state is changed - user is null
-                     // launch login activity
-                     startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-                     finish();
-                 }
-             }
-     };
-
-
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        navigation.setSelectedItemId(R.id.navigation_profile);
-
-
-    }
     void setAlertDialog() {
         alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle("Use flashlight");

@@ -20,14 +20,12 @@ public class SplashscreenActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
 
-        profile = new Profile(new User("abcdef@gmail.com", "abc", "def", "9876543210"));
-
         (new Handler()).postDelayed(new Runnable() {
             @Override
             public void run() {
                 startActivity(new Intent(SplashscreenActivity.this, LoginActivity.class));
                 finish();
             }
-        }, 3000);
+        }, 1000);
     }
 }

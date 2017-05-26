@@ -38,6 +38,8 @@ public class SelectStationActivity extends AppCompatActivity {
         String msg  = intent.getStringExtra("MSG");
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
         stops = new ArrayList<>();
+
+        //DONOT SCAN RANDOM BARCODES WHICH CANT BE PARSED
         int a = Integer.parseInt(msg);
         GlobalVariables.begin = a;
 

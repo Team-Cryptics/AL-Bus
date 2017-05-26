@@ -1,6 +1,5 @@
 package com.example.punyaaachman.albus.Activities;
 
-import android.*;
 import android.app.Service;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -34,13 +33,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-import android.app.Service;
-import android.content.Intent;
-import android.os.IBinder;
-import android.support.annotation.Nullable;
-import android.widget.Toast;
-
-
 /**
  * Created by SUPERUSER on 13-04-2017.
  */
@@ -54,11 +46,12 @@ public class MapService extends Service {
     String BASE__URL = "https://maps.googleapis.com/";
     String API_KEY = "AIzaSyDX-TtDU9nSjnzElGgSxDo0bf8AQ_zPqR8";
     int stopDistance;
-    TextToSpeech t1;
+    TextToSpeech textToSpeech;
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
+        Log.i("TAG","Service Bind");
         return null;
     }
 
@@ -66,7 +59,7 @@ public class MapService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         // Let it continue running until it is stopped.
         Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();
-
+        Log.i("TAG","Service Started");
         stops_latlong = new LinkedHashMap<>();
         stops_latlong.put("0", "28.6098,77.1002");
         stops_latlong.put("1", "28.6304,77.0798");
@@ -78,12 +71,12 @@ public class MapService extends Service {
         Retrofit retrofit = builder.build();
         client = retrofit.create(MapInterface.class);
 
-        t1= new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+        textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 if(status != TextToSpeech.ERROR) {
-                    t1.setLanguage(Locale.US);
-                    t1.setPitch(1/4);
+                    textToSpeech.setLanguage(Locale.US);
+                    textToSpeech.setPitch(1/4);
                 }
             }
         });
@@ -102,7 +95,7 @@ public class MapService extends Service {
             // for ActivityCompat#requestPermissions for more details.
             Toast.makeText(this, "Please enable permissions", Toast.LENGTH_SHORT).show();
         }
-        locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER, 45000, 0, listener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,10000,0,listener);
 
 
         return START_STICKY;
@@ -111,6 +104,7 @@ public class MapService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Log.i("TAG","Service Stopped");
         Toast.makeText(this, "Service Destroyed", Toast.LENGTH_LONG).show();
     }
 
@@ -123,12 +117,13 @@ public class MapService extends Service {
             lat= location.getLatitude();
             lon=location.getLongitude();
 
+            Log.i("TAG","Service - location listener");
             Log.i("TAG",lat+" "+lon+" ");
 
             String origin = lat+","+lon; //CURRENT LOCATION OF THE BUS
             String d = Integer.toString(GlobalVariables.dest);
             String destination= stops_latlong.get(d);
-            Log.i("TAG","Destination latlong is"+destination);
+            Log.i("TAG","Destination latlong is "+destination);
             calculateDistance(origin,destination);
         /*    switch(stopCode) {
 
@@ -190,10 +185,15 @@ public class MapService extends Service {
 
                         String toSpeak ="You are about to reach your destination";
                         Toast.makeText(getApplicationContext(), toSpeak,Toast.LENGTH_SHORT).show();
-                        t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+                        textToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
 
-
+                        if(stopDistance==0){
+                            String reached ="Kindly ensure you board off at your destination";
+                            textToSpeech.speak(reached, TextToSpeech.QUEUE_FLUSH, null);
+                        }
                     }
+
+
                 }
 
                 @Override
