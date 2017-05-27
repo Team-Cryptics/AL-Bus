@@ -100,7 +100,7 @@ public class MapService extends Service {
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10000, 0, listener);
 
 
-        return START_STICKY;
+        return START_NOT_STICKY;
     }
 
     @Override
