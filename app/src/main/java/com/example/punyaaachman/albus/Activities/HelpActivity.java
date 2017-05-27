@@ -7,7 +7,7 @@ import com.example.punyaaachman.albus.R;
 
 public class HelpActivity extends AppCompatActivity
 {
-
+    //All in layout
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
