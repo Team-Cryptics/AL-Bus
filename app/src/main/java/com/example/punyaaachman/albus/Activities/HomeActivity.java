@@ -19,7 +19,6 @@ import com.example.punyaaachman.albus.Fragments.ProfileFragment;
 import com.example.punyaaachman.albus.Fragments.WalletFragment;
 import com.example.punyaaachman.albus.POJO.GlobalVariables;
 import com.example.punyaaachman.albus.POJO.Profile;
-import com.example.punyaaachman.albus.POJO.Trips;
 import com.example.punyaaachman.albus.R;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
@@ -31,13 +30,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.List;
-
 import static com.example.punyaaachman.albus.POJO.GlobalVariables.profile;
 
 
-public class HomeActivity extends AppCompatActivity
-{
+public class HomeActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthStateListener;
 
@@ -51,17 +47,17 @@ public class HomeActivity extends AppCompatActivity
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        firebase=FirebaseDatabase.getInstance();
-        dref=firebase.getReference();
+        GlobalVariables.isTicket=false; //To change balance in further activities and not call on event value listener
+        firebase = FirebaseDatabase.getInstance();
+        dref = firebase.getReference();
 
         mAuth = FirebaseAuth.getInstance();
 
-        mAuthStateListener= new FirebaseAuth.AuthStateListener() {
+        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -83,36 +79,34 @@ public class HomeActivity extends AppCompatActivity
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener()
-    {
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item)
-        {   firebase=FirebaseDatabase.getInstance();
-            dref=firebase.getReference();
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            firebase = FirebaseDatabase.getInstance();
+            dref = firebase.getReference();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            switch (item.getItemId())
-            {
+            switch (item.getItemId()) {
                 case R.id.navigation_profile:
                     fragmentTransaction.replace(R.id.content, new ProfileFragment(), "p").commit();
                     GlobalVariables.isProfile = true;
 
-                    //??
-                   // dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(profile);
+                    //Cant use this because at app startup, it will be null
+                    //         dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(profile);
 
-                        dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
+                    dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                 profile = dataSnapshot.getValue(Profile.class);
+                            profile = dataSnapshot.getValue(Profile.class);
 
 //                                Log.i("TAG", profile.getUser().getEmail());
 
-                                if(GlobalVariables.isProfile) {
-                                    tvImage = (TextView) findViewById(R.id.tvImage);
-                                    tvName = (TextView) findViewById(R.id.tvName);
-                                    tvNumber = (TextView) findViewById(R.id.tvNumber);
-                                    tvProfileBalanced = (TextView) findViewById(R.id.tvBalanceProfile);
+                            if (GlobalVariables.isProfile&&!GlobalVariables.isTicket) {
+                                tvImage = (TextView) findViewById(R.id.tvImage);
+                                tvName = (TextView) findViewById(R.id.tvName);
+                                tvNumber = (TextView) findViewById(R.id.tvNumber);
+                                tvProfileBalanced = (TextView) findViewById(R.id.tvBalanceProfile);
 
 //                                    GlobalVariables.isTicket=false;
 //                                    if(GlobalVariables.trip!=null&&GlobalVariables.isTicket==false) {
@@ -120,34 +114,34 @@ public class HomeActivity extends AppCompatActivity
 //                                        Log.i("TAG","Profile "+GlobalVariables.profile.getTripsList().get(0).getStart());
 //                                    }
 
-                                    tvName.setText(profile.getUser().getFirstName() + " " + profile.getUser().getLastName());
-                                    tvNumber.setText(profile.getUser().getNumber());
-                                    tvProfileBalanced.setText(Double.toString(profile.getUser().getBalance()));
-                                    tvImage.setText(Character.toString(profile.getUser().getFirstName().charAt(0)) + Character.toString(profile.getUser().getLastName().charAt(0)));
-
-                                }
-
+                                tvName.setText(profile.getUser().getFirstName() + " " + profile.getUser().getLastName());
+                                tvNumber.setText(profile.getUser().getNumber());
+                                tvProfileBalanced.setText(Double.toString(profile.getUser().getBalance()));
+                                tvImage.setText(Character.toString(profile.getUser().getFirstName().charAt(0)) + Character.toString(profile.getUser().getLastName().charAt(0)));
 
                             }
 
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
 
-                            }
-                        });
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
 
                     return true;
                 case R.id.navigation_scan:
                     GlobalVariables.isProfile = false;
                     setAlertDialog();
-                    if(profile!=null) {
+                    if (profile != null) {
                         dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
 
                                 profile = dataSnapshot.getValue(Profile.class);
 
-                                    Log.i("TAG", profile.getUser().getEmail());
+                                Log.i("TAG", profile.getUser().getEmail());
 
                             }
 
@@ -161,19 +155,18 @@ public class HomeActivity extends AppCompatActivity
                 case R.id.navigation_wallet:
                     fragmentTransaction.replace(R.id.content, new WalletFragment()).commit();
                     GlobalVariables.isProfile = false;
-                    dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(profile);
-                   if(profile!=null) {
+
+                    if (profile != null) {
+                      //  dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(profile);
                         dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
 
                                 profile = dataSnapshot.getValue(Profile.class);
 
-
-                                if(!GlobalVariables.isProfile) {
+                                if (!GlobalVariables.isProfile&&!GlobalVariables.isTicket) {
                                     Log.i("TAG", profile.getUser().getEmail());
                                     ((TextView) findViewById(R.id.tvBalanceWallet)).setText("Rs. " + profile.getUser().getBalance());
-
                                     findViewById(R.id.btnAddMoney).setVisibility(View.VISIBLE);
                                     findViewById(R.id.pbAddMoney).setVisibility(View.GONE);
                                 }
@@ -261,15 +254,15 @@ public class HomeActivity extends AppCompatActivity
     }
 
     public void addMoney() {
-      //  profile.getUser().setBalance(profile.getUser().getBalance() + Double.valueOf(((EditText) findViewById(R.id.etMoney)).getText().toString()));
+        //  profile.getUser().setBalance(profile.getUser().getBalance() + Double.valueOf(((EditText) findViewById(R.id.etMoney)).getText().toString()));
 
         double a = profile.getUser().getBalance();
-        String b = ((EditText)findViewById(R.id.etMoney)).getText().toString();
-        double c= Double.parseDouble(b);
-        double d = a+c;
+        String b = ((EditText) findViewById(R.id.etMoney)).getText().toString();
+        double c = Double.parseDouble(b);
+        double d = a + c;
         profile.getUser().setBalance(d);
         ((EditText) findViewById(R.id.etMoney)).setText(" ");
-        ((TextView)findViewById(R.id.tvBalanceWallet)).setText(Double.toString(profile.getUser().getBalance()));
+        ((TextView) findViewById(R.id.tvBalanceWallet)).setText(Double.toString(profile.getUser().getBalance()));
         dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(profile);
 
 
@@ -285,10 +278,10 @@ public class HomeActivity extends AppCompatActivity
 
                     //                statusMessage.setText(R.string.barcode_success);
                     //              barcodeValue.setText(barcode.displayValue);
-                    Log.i("TAG",barcode.displayValue);
+                    Log.i("TAG", barcode.displayValue);
 
-                    Intent intent = new Intent(HomeActivity.this,SelectStationActivity.class);
-                    intent.putExtra("MSG",barcode.displayValue);
+                    Intent intent = new Intent(HomeActivity.this, SelectStationActivity.class);
+                    intent.putExtra("MSG", barcode.displayValue);
                     startActivity(intent);
 
                 } else {
@@ -299,8 +292,7 @@ public class HomeActivity extends AppCompatActivity
                 //      statusMessage.setText(String.format(getString(R.string.barcode_error),
                 CommonStatusCodes.getStatusCodeString(resultCode);
             }
-        }
-        else {
+        } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }

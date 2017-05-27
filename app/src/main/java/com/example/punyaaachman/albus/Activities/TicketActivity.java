@@ -20,14 +20,8 @@ import java.util.Date;
 
 public class TicketActivity extends AppCompatActivity {
     TextView tvFrom, tvTo, tvAmount;
-    Button btScreenshot;
+    Button btScreenshot,btProceed;
 
-//    FirebaseDatabase firebase;
-//    DatabaseReference dref;
-//    private FirebaseAuth mAuth;
-//    Profile profileTemp;
-//    Trips trip;
-//    ArrayList<Trips> tripsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +29,17 @@ public class TicketActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ticket);
 
         btScreenshot = (Button) findViewById(R.id.bt_ss);
+        btProceed= (Button) findViewById(R.id.bt_proceed);
         btScreenshot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 takeScreenshot();
+            }
+        });
+        btProceed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),HomeActivity.class));
             }
         });
 
@@ -46,36 +47,6 @@ public class TicketActivity extends AppCompatActivity {
         tvTo = (TextView) findViewById(R.id.tvToR);
         tvAmount = (TextView) findViewById(R.id.tvAmountR);
 
-        GlobalVariables.isTicket = true;
-        GlobalVariables.trip = new Trips(GlobalVariables.b,GlobalVariables.d,(GlobalVariables.price));
-
-//        firebase =FirebaseDatabase.getInstance();
-//        dref = firebase.getReference();
-
-        // mAuth = FirebaseAuth.getInstance();
-
-//        trip = new Trips(GlobalVariables.b,GlobalVariables.d,(GlobalVariables.price));
-
-//        dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//
-//                profileTemp = dataSnapshot.getValue(Profile.class);
-//                tripsList = profileTemp.getTripsList();
-//            }
-
-
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-
-//        tripsList.add(trip);
-        //    GlobalVariables.profile=profileTemp;
-
-        //       dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(profile);
 
         tvFrom.setText(GlobalVariables.b);
         tvTo.setText(GlobalVariables.d);
@@ -88,14 +59,6 @@ public class TicketActivity extends AppCompatActivity {
 
     }
 
-//    public void startService(View view) {
-//        startService(new Intent(getBaseContext(), MapService.class));
-//    }
-//
-//    // Method to stop the service
-//    public void stopService(View view) {
-//        stopService(new Intent(getBaseContext(), MapService.class));
-//    }
 
 
     private void takeScreenshot() {

@@ -52,7 +52,7 @@ public class DefaulterService extends Service {
     MapInterface client;
     int distance;
 
-    List<Boolean> checks = new ArrayList<>(20);
+    List<Boolean> checks = new ArrayList<>(30);
     int i;
 
     String BASE__URL = "https://maps.googleapis.com/";

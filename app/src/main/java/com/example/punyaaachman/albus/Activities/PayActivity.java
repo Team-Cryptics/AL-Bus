@@ -64,6 +64,7 @@ public class PayActivity extends AppCompatActivity {
 
                         GlobalVariables.profile.getUser().setBalance(GlobalVariables.profile.getUser().getBalance() - GlobalVariables.price);
 
+                        GlobalVariables.isTicket=true;
                         dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(profile);
 
                         startActivity(new Intent(PayActivity.this, TicketActivity.class));

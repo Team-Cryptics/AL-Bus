@@ -159,14 +159,19 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:orientation="vertical"
                         android:layout_margin="5dp"
                         android:layout_weight="1">
 
-                        <ImageView
-                            android:layout_width="wrap_content"
+                        <Button
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-
-                            app:srcCompat="@drawable/ticket" />
+                            android:layout_marginTop="60dp"
+                            android:id="@+id/bt_proceed"
+                            android:textSize="17dp"
+                            android:text="Proceed to Home"
+                            android:gravity="center"
+                            android:layout_gravity="center"/>
 
                     </LinearLayout>
 
