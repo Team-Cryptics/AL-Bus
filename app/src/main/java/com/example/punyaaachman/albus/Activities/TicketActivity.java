@@ -11,16 +11,33 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.punyaaachman.albus.POJO.GlobalVariables;
+import com.example.punyaaachman.albus.POJO.Profile;
+import com.example.punyaaachman.albus.POJO.Trips;
 import com.example.punyaaachman.albus.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Date;
+
+import static com.example.punyaaachman.albus.POJO.GlobalVariables.profile;
 
 public class TicketActivity extends AppCompatActivity {
     TextView tvFrom, tvTo, tvAmount;
-
     Button btScreenshot;
+
+    FirebaseDatabase firebase;
+    DatabaseReference dref;
+    private FirebaseAuth mAuth;
+    Trips trips;
+    ArrayList<Trips> tripsList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +54,37 @@ public class TicketActivity extends AppCompatActivity {
         tvFrom = (TextView) findViewById(R.id.tvFromR);
         tvTo = (TextView) findViewById(R.id.tvToR);
         tvAmount = (TextView) findViewById(R.id.tvAmountR);
+
+        firebase =FirebaseDatabase.getInstance();
+        dref = firebase.getReference();
+
+        mAuth = FirebaseAuth.getInstance();
+
+
+        dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                profile = dataSnapshot.getValue(Profile.class);
+                trips = new Trips(GlobalVariables.b,GlobalVariables.d,(GlobalVariables.price));
+                tripsList = profile.getTripsList();
+
+            }
+
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        tripsList.add(trips);
+        profile.setTripsList(tripsList);
+
+
+        dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(profile);
 
         tvFrom.setText(GlobalVariables.b);
         tvTo.setText(GlobalVariables.d);

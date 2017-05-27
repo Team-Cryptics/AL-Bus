@@ -32,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import static com.example.punyaaachman.albus.POJO.GlobalVariables.profile;
 
+
 public class HomeActivity extends AppCompatActivity
 {
     private FirebaseAuth mAuth;
@@ -69,6 +70,7 @@ public class HomeActivity extends AppCompatActivity
                 }
             }
         };
+
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

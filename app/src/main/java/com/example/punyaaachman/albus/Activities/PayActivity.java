@@ -38,7 +38,7 @@ public class PayActivity extends AppCompatActivity {
         tvFrom.setText(GlobalVariables.b);
         tvTo.setText(GlobalVariables.d);
 
-        int diff = GlobalVariables.dest-GlobalVariables.begin;
+        int diff = GlobalVariables.dest-GlobalVariables.begin;    ////////// beginning and final station
         if(diff<3) {
             GlobalVariables.price=10;
         }

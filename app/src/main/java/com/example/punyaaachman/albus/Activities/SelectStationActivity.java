@@ -36,11 +36,11 @@ public class SelectStationActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String msg  = intent.getStringExtra("MSG");
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();    // gives the beg station number
         stops = new ArrayList<>();
 
-        //DONOT SCAN RANDOM BARCODES WHICH CANT BE PARSED
-        int a = Integer.parseInt(msg);
+        //DO NOT SCAN RANDOM BARCODES WHICH CANT BE PARSED
+        int a = Integer.parseInt(msg);            //Integer station number
         GlobalVariables.begin = a;
 
         switch (a){
