@@ -51,7 +51,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        GlobalVariables.isTicket=false; //To change balance in further activities and not call on event value listener
+        GlobalVariables.isTicket=false; //To change balance in further activities and not call on event value listenergit
         firebase = FirebaseDatabase.getInstance();
         dref = firebase.getReference();
 
