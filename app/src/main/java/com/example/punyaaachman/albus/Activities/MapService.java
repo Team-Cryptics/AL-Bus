@@ -190,6 +190,8 @@ public class MapService extends Service {
                         if(stopDistance<50){
                             String reached ="Kindly ensure you board off at your destination";
                             textToSpeech.speak(reached, TextToSpeech.QUEUE_FLUSH, null);
+                            startService(new Intent(MapService.this,DefaulterService.class));
+                            stopSelf();
                         }
                     }
 
