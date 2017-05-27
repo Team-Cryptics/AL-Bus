@@ -27,7 +27,7 @@
             android:value="barcode" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDX-TtDU9nSjnzElGgSxDo0bf8AQ_zPqR8" />
+            android:value="AIzaSyCTOFU8cjyhfufwU7jwJjxzsjQ0hGCP_14" />
 
         <activity
             android:name=".Activities.SplashscreenActivity"
