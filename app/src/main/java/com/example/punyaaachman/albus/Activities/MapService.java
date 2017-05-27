@@ -196,6 +196,7 @@ public class MapService extends Service {
 
                             Intent serviceIntent = new Intent(MapService.this, DefaulterService.class);
                             startService(serviceIntent);
+                            stopSelf();
 
 
                         }

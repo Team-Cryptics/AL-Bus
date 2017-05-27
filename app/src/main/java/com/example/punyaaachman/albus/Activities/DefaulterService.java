@@ -52,7 +52,8 @@ public class DefaulterService extends Service {
     MapInterface client;
     int distance;
 
-    List<Boolean> checks = new ArrayList<>(30);
+    Boolean checks [];
+
     int i;
 
     String BASE__URL = "https://maps.googleapis.com/";
@@ -61,20 +62,25 @@ public class DefaulterService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
+
+
         return null;
     }
 
     @Override
     public int onStartCommand(Intent intent,int flags, int startId) {
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference=firebaseDatabase.getReference();
 
+        checks = new Boolean[20];
         for(int j=0;j<20;j++) {
-            checks.get(j).equals(true);
+            checks[j]=true;
         }
 
         i=0;
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference=firebaseDatabase.getReference();
+
 
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         LocationListener listener = new OurDefaulterListener();
@@ -114,6 +120,8 @@ public class DefaulterService extends Service {
             Log.i("TAG","User location is "+lat + " " + lon + " ");
 
             origin = lat + "," + lon; //Location of user
+
+
 
             databaseReference.child("Bus app coordinates").addValueEventListener(new ValueEventListener() {
                 @Override
@@ -157,7 +165,7 @@ public class DefaulterService extends Service {
                         if(i<20) {
 
                             if(distance<500) {
-                                checks.get(i).equals(false);
+                                checks[i].equals(false);
                             }
 
                             i++;
@@ -167,7 +175,7 @@ public class DefaulterService extends Service {
 
                             int countDefaulters=0;
                             for(int j=0;j<20;j++) {
-                                if(checks.get(j).equals(false)) {
+                                if(checks[j].equals(false)) {
                                     countDefaulters++;
                                 }
                             }
