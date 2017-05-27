@@ -6,7 +6,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.punyaaachman.albus.POJO.GlobalVariables;
+import com.example.punyaaachman.albus.POJO.Trips;
 import com.example.punyaaachman.albus.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TripsActivity extends AppCompatActivity
 {
@@ -22,8 +26,15 @@ public class TripsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trips);
 
+        ArrayList<Trips> trips = new ArrayList<>();
+        if(GlobalVariables.trip!=null) {
+        trips.add(GlobalVariables.trip); }
+        Trips trip = new Trips("Rohini","DC Chowk",20.0);
+        trips.add(trip);
+
+
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
-        adapter = new TripsAdapter(GlobalVariables.profile.getTripsList());
+        adapter = new TripsAdapter(trips);
         layoutManager  = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);

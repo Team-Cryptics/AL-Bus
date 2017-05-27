@@ -10,9 +10,11 @@ public class GlobalVariables {
     public static boolean useFlash;
     public static Profile profile;
 
+    public static Trips trip;
     public static String d,b;
     public static double price;
     public static boolean isProfile;
+    public static boolean isTicket;
 
 
 }

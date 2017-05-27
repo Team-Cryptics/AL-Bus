@@ -19,6 +19,7 @@ import com.example.punyaaachman.albus.Fragments.ProfileFragment;
 import com.example.punyaaachman.albus.Fragments.WalletFragment;
 import com.example.punyaaachman.albus.POJO.GlobalVariables;
 import com.example.punyaaachman.albus.POJO.Profile;
+import com.example.punyaaachman.albus.POJO.Trips;
 import com.example.punyaaachman.albus.R;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
@@ -29,6 +30,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.List;
 
 import static com.example.punyaaachman.albus.POJO.GlobalVariables.profile;
 
@@ -103,13 +106,20 @@ public class HomeActivity extends AppCompatActivity
 
                                  profile = dataSnapshot.getValue(Profile.class);
 
-                                Log.i("TAG", profile.getUser().getEmail());
+//                                Log.i("TAG", profile.getUser().getEmail());
 
                                 if(GlobalVariables.isProfile) {
                                     tvImage = (TextView) findViewById(R.id.tvImage);
                                     tvName = (TextView) findViewById(R.id.tvName);
                                     tvNumber = (TextView) findViewById(R.id.tvNumber);
                                     tvProfileBalanced = (TextView) findViewById(R.id.tvBalanceProfile);
+
+//                                    GlobalVariables.isTicket=false;
+//                                    if(GlobalVariables.trip!=null&&GlobalVariables.isTicket==false) {
+//                                        GlobalVariables.profile.getTripsList().add(GlobalVariables.trip);
+//                                        Log.i("TAG","Profile "+GlobalVariables.profile.getTripsList().get(0).getStart());
+//                                    }
+
                                     tvName.setText(profile.getUser().getFirstName() + " " + profile.getUser().getLastName());
                                     tvNumber.setText(profile.getUser().getNumber());
                                     tvProfileBalanced.setText(Double.toString(profile.getUser().getBalance()));

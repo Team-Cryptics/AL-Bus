@@ -3,40 +3,31 @@ package com.example.punyaaachman.albus.Activities;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.punyaaachman.albus.POJO.GlobalVariables;
-import com.example.punyaaachman.albus.POJO.Profile;
 import com.example.punyaaachman.albus.POJO.Trips;
 import com.example.punyaaachman.albus.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
 import java.util.Date;
-
-import static com.example.punyaaachman.albus.POJO.GlobalVariables.profile;
 
 public class TicketActivity extends AppCompatActivity {
     TextView tvFrom, tvTo, tvAmount;
     Button btScreenshot;
 
-    FirebaseDatabase firebase;
-    DatabaseReference dref;
-    private FirebaseAuth mAuth;
-    Trips trips;
-    ArrayList<Trips> tripsList;
+//    FirebaseDatabase firebase;
+//    DatabaseReference dref;
+//    private FirebaseAuth mAuth;
+//    Profile profileTemp;
+//    Trips trip;
+//    ArrayList<Trips> tripsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,56 +46,56 @@ public class TicketActivity extends AppCompatActivity {
         tvTo = (TextView) findViewById(R.id.tvToR);
         tvAmount = (TextView) findViewById(R.id.tvAmountR);
 
-        firebase =FirebaseDatabase.getInstance();
-        dref = firebase.getReference();
+        GlobalVariables.isTicket = true;
+        GlobalVariables.trip = new Trips(GlobalVariables.b,GlobalVariables.d,(GlobalVariables.price));
 
-        mAuth = FirebaseAuth.getInstance();
+//        firebase =FirebaseDatabase.getInstance();
+//        dref = firebase.getReference();
 
+        // mAuth = FirebaseAuth.getInstance();
 
-        dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+//        trip = new Trips(GlobalVariables.b,GlobalVariables.d,(GlobalVariables.price));
 
-
-                profile = dataSnapshot.getValue(Profile.class);
-                trips = new Trips(GlobalVariables.b,GlobalVariables.d,(GlobalVariables.price));
-                tripsList = profile.getTripsList();
-
-            }
-
-
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        tripsList.add(trips);
-        profile.setTripsList(tripsList);
+//        dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//
+//                profileTemp = dataSnapshot.getValue(Profile.class);
+//                tripsList = profileTemp.getTripsList();
+//            }
 
 
-        dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(profile);
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+
+//        tripsList.add(trip);
+        //    GlobalVariables.profile=profileTemp;
+
+        //       dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(profile);
 
         tvFrom.setText(GlobalVariables.b);
         tvTo.setText(GlobalVariables.d);
-        tvAmount.setText(String.valueOf("Rs. "+GlobalVariables.price));
+        tvAmount.setText(String.valueOf("Rs. " + GlobalVariables.price));
 
 //        Intent serviceIntent = new Intent(this,DefaulterService.class);
 //        startService(serviceIntent);
 
-        startService(new Intent(TicketActivity.this,MapService.class));
+        startService(new Intent(TicketActivity.this, MapService.class));
 
     }
 
-    public void startService(View view) {
-        startService(new Intent(getBaseContext(), MapService.class));
-    }
-
-    // Method to stop the service
-    public void stopService(View view) {
-        stopService(new Intent(getBaseContext(), MapService.class));
-    }
+//    public void startService(View view) {
+//        startService(new Intent(getBaseContext(), MapService.class));
+//    }
+//
+//    // Method to stop the service
+//    public void stopService(View view) {
+//        stopService(new Intent(getBaseContext(), MapService.class));
+//    }
 
 
     private void takeScreenshot() {
@@ -137,6 +128,7 @@ public class TicketActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     private void openScreenshot(File imageFile) {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
