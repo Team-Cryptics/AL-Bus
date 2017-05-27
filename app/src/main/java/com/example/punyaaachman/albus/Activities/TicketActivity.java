@@ -40,7 +40,10 @@ public class TicketActivity extends AppCompatActivity {
 
         tvFrom.setText(GlobalVariables.b);
         tvTo.setText(GlobalVariables.d);
-        tvAmount.setText(String.valueOf(GlobalVariables.price));
+        tvAmount.setText(String.valueOf("Rs. "+GlobalVariables.price));
+
+//        Intent serviceIntent = new Intent(this,DefaulterService.class);
+//        startService(serviceIntent);
 
         startService(new Intent(TicketActivity.this,MapService.class));
 

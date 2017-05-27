@@ -72,6 +72,9 @@
 
         <service android:name=".Activities.MapService"
             android:enabled="true"/>
+
+        <service android:name=".Activities.DefaulterService"
+            android:enabled="true"/>
     </application>
 
 </manifest>

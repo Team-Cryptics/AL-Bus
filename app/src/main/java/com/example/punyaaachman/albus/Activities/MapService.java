@@ -51,7 +51,7 @@ public class MapService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        Log.i("TAG","Service Bind");
+        Log.i("TAG", "Service Bind");
         return null;
     }
 
@@ -59,7 +59,7 @@ public class MapService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         // Let it continue running until it is stopped.
         Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();
-        Log.i("TAG","Service Started");
+        Log.i("TAG", "Service Started");
         stops_latlong = new LinkedHashMap<>();
         stops_latlong.put("0", "28.6098,77.1002");
         stops_latlong.put("1", "28.6304,77.0798");
@@ -74,9 +74,9 @@ public class MapService extends Service {
         textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
-                if(status != TextToSpeech.ERROR) {
+                if (status != TextToSpeech.ERROR) {
                     textToSpeech.setLanguage(Locale.US);
-                    textToSpeech.setPitch(1/4);
+                    textToSpeech.setPitch(1 / 4);
                 }
             }
         });
@@ -95,7 +95,7 @@ public class MapService extends Service {
             // for ActivityCompat#requestPermissions for more details.
             Toast.makeText(this, "Please enable permissions", Toast.LENGTH_SHORT).show();
         }
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,10000,0,listener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10000, 0, listener);
 
 
         return START_STICKY;
@@ -104,27 +104,27 @@ public class MapService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.i("TAG","Service Stopped");
+        Log.i("TAG", "Service Stopped");
         Toast.makeText(this, "Service Destroyed", Toast.LENGTH_LONG).show();
     }
-
 
 
     private class OurListener implements LocationListener {
         @Override
         public void onLocationChanged(Location location) {
             location.setAccuracy(Criteria.ACCURACY_HIGH);
-            lat= location.getLatitude();
-            lon=location.getLongitude();
+            lat = location.getLatitude();
+            lon = location.getLongitude();
 
-            Log.i("TAG","Service - location listener");
-            Log.i("TAG",lat+" "+lon+" ");
+            Log.i("TAG", "Service - location listener");
+            Log.i("TAG", lat + " " + lon + " ");
 
-            String origin = lat+","+lon; //CURRENT LOCATION OF THE BUS
+            String origin = lat + "," + lon; //CURRENT LOCATION OF THE BUS
             String d = Integer.toString(GlobalVariables.dest);
-            String destination= stops_latlong.get(d);
-            Log.i("TAG","Destination latlong is "+destination);
-            calculateDistance(origin,destination);
+            String destination = stops_latlong.get(d);
+            Log.i("TAG", "Destination latlong is " + destination);
+            calculateDistance(origin, destination);
+
         /*    switch(stopCode) {
 
                 case 0: destination = stops_latlong.get("1");
@@ -146,8 +146,6 @@ public class MapService extends Service {
             } */
 
 
-
-
         }
 
         @Override
@@ -165,33 +163,35 @@ public class MapService extends Service {
 
         }
 
-        void calculateDistance(String origin,String destination){
+        void calculateDistance(String origin, String destination) {
 
-            Call<MapData> data = client.getMapData(origin,destination,"driving",API_KEY);
+            Call<MapData> data = client.getMapData(origin, destination, "driving", API_KEY);
             data.enqueue(new Callback<MapData>() {
                 @Override
                 public void onResponse(Call<MapData> call, Response<MapData> response) {
                     MapData mapData = response.body();
-                    Log.i("TAG",mapData.getStatus());
+                    Log.i("TAG", mapData.getStatus());
 
                     List<Row> rowData = mapData.getRows();
                     Row row = rowData.get(0);
                     List<Element> elementList = row.getElements();
                     Distance distance = elementList.get(0).getDistance();
                     stopDistance = distance.getValue();
-                    Log.i("TAG","Distance - "+stopDistance);
+                    Log.i("TAG", "Distance - " + stopDistance);
 
-                    if(stopDistance<800) {
+                    if (stopDistance < 800) {
 
-                        String toSpeak ="You are about to reach your destination";
-                        Toast.makeText(getApplicationContext(), toSpeak,Toast.LENGTH_SHORT).show();
+                        String toSpeak = "You are about to reach your destination";
+                        Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
                         textToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
 
-                        if(stopDistance<50){
-                            String reached ="Kindly ensure you board off at your destination";
+                        if (stopDistance < 500) {
+                            String reached = "Kindly ensure you board off at your destination";
                             textToSpeech.speak(reached, TextToSpeech.QUEUE_FLUSH, null);
-                            startService(new Intent(MapService.this,DefaulterService.class));
-                            stopSelf();
+
+                            Intent serviceIntent = new Intent(MapService.this, DefaulterService.class);
+                            startService(serviceIntent);
+
                         }
                     }
 
@@ -200,10 +200,9 @@ public class MapService extends Service {
 
                 @Override
                 public void onFailure(Call<MapData> call, Throwable t) {
-                    Log.i("TAG","FAIL");
+                    Log.i("TAG", "FAIL");
                 }
             });
-
 
 
         }

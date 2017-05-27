@@ -15,7 +15,7 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="30dp"
+        android:layout_margin="20dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="30dp"
         android:background="@color/cardview_light_background">
@@ -48,12 +48,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:layout_margin="10dp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                 android:text="Ticket ID : A123RDSQA"/>
 
             <LinearLayout
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -61,15 +62,20 @@
                 <LinearLayout
                     android:padding="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <TextView
                         android:text="From:"
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:textAppearance="?android:textAppearanceMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <TextView
                         android:id="@+id/tvFromR"
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:text="..."
                         android:textAppearance="?android:textAppearanceLarge"
                         android:layout_marginLeft="6dp"
@@ -80,15 +86,20 @@
                 <LinearLayout
                     android:padding="10dp"
                     android:layout_width="match_parent"
+                    android:orientation="vertical"
                     android:layout_height="wrap_content">
 
                     <TextView
                         android:text="To:"
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:textAppearance="?android:textAppearanceMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <TextView
                         android:id="@+id/tvToR"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:text="..."
                         android:textAppearance="?android:textAppearanceLarge"
                         android:layout_marginLeft="6dp"
@@ -98,16 +109,21 @@
                 </LinearLayout>
                 <LinearLayout
                     android:padding="10dp"
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
                         android:text="Amount:"
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:textAppearance="?android:textAppearanceMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <TextView
                         android:id="@+id/tvAmountR"
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:text="..."
                         android:textAppearance="?android:textAppearanceLarge"
                         android:layout_marginLeft="6dp"
@@ -119,6 +135,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -142,12 +159,13 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_margin="5dp"
                         android:layout_weight="1">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="8dp"
+
                             app:srcCompat="@drawable/ticket" />
 
                     </LinearLayout>

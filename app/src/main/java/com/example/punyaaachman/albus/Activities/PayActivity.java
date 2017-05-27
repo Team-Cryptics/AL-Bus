@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.example.punyaaachman.albus.POJO.GlobalVariables;
 import com.example.punyaaachman.albus.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -18,6 +19,7 @@ public class PayActivity extends AppCompatActivity {
     TextView tvFrom, tvTo, tvAmount, tvBalance;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference dref;
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,7 @@ public class PayActivity extends AppCompatActivity {
 
         firebaseDatabase=FirebaseDatabase.getInstance();
         dref=firebaseDatabase.getReference();
+        auth=FirebaseAuth.getInstance();
 
         tvFrom = (TextView) findViewById(R.id.tvFrom);
         tvTo = (TextView) findViewById(R.id.tvTo);
@@ -60,10 +63,9 @@ public class PayActivity extends AppCompatActivity {
                     if (GlobalVariables.profile.getUser().getBalance() >= GlobalVariables.price) {
 
                         GlobalVariables.profile.getUser().setBalance(GlobalVariables.profile.getUser().getBalance() - GlobalVariables.price);
-                     //   Trips trips = new Trips(GlobalVariables.b, GlobalVariables.d, GlobalVariables.price);
-                     //   profile.getTripsList().add(trips);
 
-                      //  dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(profile);
+                        dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(profile);
+
                         startActivity(new Intent(PayActivity.this, TicketActivity.class));
                         finish();
                     } else {

@@ -8,6 +8,10 @@ public class CoordinatesInfo {
     double lat;
     double lon;
 
+    public CoordinatesInfo() {
+
+    }
+
     public CoordinatesInfo(double lat, double lon) {
         this.lat = lat;
         this.lon = lon;
