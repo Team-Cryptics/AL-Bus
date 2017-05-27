@@ -44,7 +44,7 @@ public class MapService extends Service {
     Double lat, lon;
     LinkedHashMap<String, String> stops_latlong;
     String BASE__URL = "https://maps.googleapis.com/";
-    String API_KEY = "AIzaSyDX-TtDU9nSjnzElGgSxDo0bf8AQ_zPqR8";
+    String API_KEY = "AIzaSyCTOFU8cjyhfufwU7jwJjxzsjQ0hGCP_14";
     int stopDistance;
     TextToSpeech textToSpeech;
 
@@ -166,7 +166,6 @@ public class MapService extends Service {
         }
 
         void calculateDistance(String origin,String destination){
-            //  String dest ="28.7499,77.1183";
 
             Call<MapData> data = client.getMapData(origin,destination,"driving",API_KEY);
             data.enqueue(new Callback<MapData>() {
@@ -174,6 +173,7 @@ public class MapService extends Service {
                 public void onResponse(Call<MapData> call, Response<MapData> response) {
                     MapData mapData = response.body();
                     Log.i("TAG",mapData.getStatus());
+
                     List<Row> rowData = mapData.getRows();
                     Row row = rowData.get(0);
                     List<Element> elementList = row.getElements();
@@ -187,7 +187,7 @@ public class MapService extends Service {
                         Toast.makeText(getApplicationContext(), toSpeak,Toast.LENGTH_SHORT).show();
                         textToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
 
-                        if(stopDistance==0){
+                        if(stopDistance<50){
                             String reached ="Kindly ensure you board off at your destination";
                             textToSpeech.speak(reached, TextToSpeech.QUEUE_FLUSH, null);
                         }
