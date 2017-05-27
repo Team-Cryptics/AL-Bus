@@ -21,6 +21,7 @@ public class PayActivity extends AppCompatActivity {
     DatabaseReference dref;
     FirebaseAuth auth;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

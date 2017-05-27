@@ -1,6 +1,7 @@
 package com.example.punyaaachman.albus.Activities;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
@@ -9,6 +10,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -182,6 +184,9 @@ public class MapService extends Service {
                     if (stopDistance < 800) {
 
                         String toSpeak = "You are about to reach your destination";
+                        Vibrator vibrate = (Vibrator)getApplication().getSystemService(Context.VIBRATOR_SERVICE);
+                        // Vibrate for 500 milliseconds
+                        vibrate.vibrate(5000);
                         Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
                         textToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
 
@@ -191,6 +196,7 @@ public class MapService extends Service {
 
                             Intent serviceIntent = new Intent(MapService.this, DefaulterService.class);
                             startService(serviceIntent);
+
 
                         }
                     }
