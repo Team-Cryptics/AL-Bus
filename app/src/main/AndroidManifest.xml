@@ -4,13 +4,12 @@
 
     <uses-feature android:name="android.hardware.camera" />
 
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -39,43 +38,49 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.LoginActivity"
-            android:label="Login"
-            />
+        <activity
+            android:name=".Activities.LoginActivity"
+            android:label="Login" />
         <activity
             android:name=".Activities.HomeActivity"
             android:label="Home" />
-        <activity android:name=".Activities.RegisterActivity"
+        <activity
+            android:name=".Activities.RegisterActivity"
             android:label="Register"
-            android:parentActivityName=".Activities.LoginActivity"
-            />
-        <activity android:name=".Activities.CardsActivity"
+            android:parentActivityName=".Activities.LoginActivity" />
+        <activity
+            android:name=".Activities.CardsActivity"
             android:label="Saved Cards"
-            android:parentActivityName=".Activities.HomeActivity"
-            />
-        <activity android:name=".Activities.TripsActivity"
+            android:parentActivityName=".Activities.HomeActivity" />
+        <activity
+            android:name=".Activities.TripsActivity"
             android:label="Past Trips"
-            android:parentActivityName=".Activities.HomeActivity"
-            />
-        <activity android:name=".Activities.HelpActivity"
+            android:parentActivityName=".Activities.HomeActivity" />
+        <activity
+            android:name=".Activities.HelpActivity"
             android:label="Help"
+            android:parentActivityName=".Activities.HomeActivity" />
+        <activity
+            android:name=".Activities.SelectStationActivity"
+            android:label="Select your destination" />
+        <activity
+            android:name=".Activities.TicketActivity"
+            android:label="Ticket" />
+        <activity
+            android:name=".Activities.PayActivity"
+            android:label="Pay" />
+
+        <service
+            android:name=".Activities.MapService"
+            android:enabled="true" />
+        <service
+            android:name=".Activities.DefaulterService"
+            android:enabled="true" />
+
+        <activity android:name=".Activities.FeedbackActivity"
+            android:label="Feedback"
             android:parentActivityName=".Activities.HomeActivity"
-            />
-        <activity android:name=".Activities.SelectStationActivity"
-            android:label="Select your destination"
-            />
-        <activity android:name=".Activities.TicketActivity"
-            android:label="Ticket"
-            />
-        <activity android:name=".Activities.PayActivity"
-            android:label="Pay"
             ></activity>
-
-        <service android:name=".Activities.MapService"
-            android:enabled="true"/>
-
-        <service android:name=".Activities.DefaulterService"
-            android:enabled="true"/>
     </application>
 
 </manifest>

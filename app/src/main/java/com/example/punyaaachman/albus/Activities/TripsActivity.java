@@ -29,7 +29,7 @@ public class TripsActivity extends AppCompatActivity
         ArrayList<Trips> trips = new ArrayList<>();
         if(GlobalVariables.trip!=null) {
         trips.add(GlobalVariables.trip); }
-        Trips trip = new Trips("Rohini","DC Chowk",20.0);
+        Trips trip = new Trips("Janakpuri","Sachdeva Public School",20.0);
         trips.add(trip);
 
 
