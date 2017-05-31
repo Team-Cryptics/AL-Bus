@@ -24,6 +24,7 @@ import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -158,9 +159,22 @@ public class HomeActivity extends AppCompatActivity {
 
                     if (profile != null) {
                       //  dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(profile);
-                        dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+                        dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addChildEventListener(new ChildEventListener() {
                             @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
+                            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                                profile = dataSnapshot.getValue(Profile.class);
+
+                                if (!GlobalVariables.isProfile&&!GlobalVariables.isTicket) {
+                                    Log.i("TAG", profile.getUser().getEmail());
+                                    ((TextView) findViewById(R.id.tvBalanceWallet)).setText("Rs. " + profile.getUser().getBalance());
+                                    findViewById(R.id.btnAddMoney).setVisibility(View.VISIBLE);
+                                    findViewById(R.id.pbAddMoney).setVisibility(View.GONE);
+
+                                }
+                            }
+
+                            @Override
+                            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
                                 profile = dataSnapshot.getValue(Profile.class);
 
@@ -173,10 +187,38 @@ public class HomeActivity extends AppCompatActivity {
                             }
 
                             @Override
+                            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                            }
+
+                            @Override
+                            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                            }
+
+                            @Override
                             public void onCancelled(DatabaseError databaseError) {
 
                             }
                         });
+//                            @Override
+//                            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                                profile = dataSnapshot.getValue(Profile.class);
+//
+//                                if (!GlobalVariables.isProfile&&!GlobalVariables.isTicket) {
+//                                    Log.i("TAG", profile.getUser().getEmail());
+//                                    ((TextView) findViewById(R.id.tvBalanceWallet)).setText("Rs. " + profile.getUser().getBalance());
+//                                    findViewById(R.id.btnAddMoney).setVisibility(View.VISIBLE);
+//                                    findViewById(R.id.pbAddMoney).setVisibility(View.GONE);
+//                                }
+//                            }
+//
+//                            @Override
+//                            public void onCancelled(DatabaseError databaseError) {
+//
+//                            }
+//                        });
                     }
                     return true;
             }

@@ -22,6 +22,7 @@ import com.example.punyaaachman.albus.POJO_Map.Distance;
 import com.example.punyaaachman.albus.POJO_Map.Element;
 import com.example.punyaaachman.albus.POJO_Map.MapData;
 import com.example.punyaaachman.albus.POJO_Map.Row;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -115,12 +116,32 @@ public class DefaulterService extends Service {
 
             origin = lat + "," + lon; //Location of user
 
-            databaseReference.child("Bus app coordinates").addValueEventListener(new ValueEventListener() {
+            databaseReference.child("Bus app coordinates").addChildEventListener(new ChildEventListener() {
                 @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
                     CoordinatesInfo coordinates = dataSnapshot.getValue(CoordinatesInfo.class);
                     destination = Double.toString(coordinates.getLat())+","+Double.toString(coordinates.getLon()); //Location of bus
                     Log.i("TAG","Location of bus "+ destination);
+
+                }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                    CoordinatesInfo coordinates = dataSnapshot.getValue(CoordinatesInfo.class);
+                    destination = Double.toString(coordinates.getLat())+","+Double.toString(coordinates.getLon()); //Location of bus
+                    Log.i("TAG","Location of bus "+ destination);
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
                 }
 
                 @Override
@@ -129,8 +150,22 @@ public class DefaulterService extends Service {
                 }
             });
 
-            calculateDistance(origin, destination);
-        }
+            }
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot) {
+//                    CoordinatesInfo coordinates = dataSnapshot.getValue(CoordinatesInfo.class);
+//                    destination = Double.toString(coordinates.getLat())+","+Double.toString(coordinates.getLon()); //Location of bus
+//                    Log.i("TAG","Location of bus "+ destination);
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError databaseError) {
+//
+//                }
+//            });
+
+          //  calculateDistance(origin, destination);
+        //}
 
         private void calculateDistance(String origin, String destination) {
 
