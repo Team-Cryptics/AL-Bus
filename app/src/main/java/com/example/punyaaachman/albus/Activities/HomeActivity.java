@@ -271,6 +271,10 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.cvHelp:
                 startActivity(new Intent(HomeActivity.this, HelpActivity.class));
                 break;
+
+            case R.id.cvFeedback :
+                startActivity(new Intent(HomeActivity.this,FeedbackActivity.class));
+                break;
             case R.id.cvSignOut:
                 mAuth.signOut();
                 mAuth.addAuthStateListener(mAuthStateListener);

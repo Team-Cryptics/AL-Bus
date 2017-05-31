@@ -188,6 +188,35 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
+            android:id="@+id/cvFeedback"
+            app:cardElevation="5dp"
+            android:layout_marginTop="2dp"
+            android:clickable="true"
+            android:onClick="onClickListener"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" android:layout_margin="10dp"
+                    android:src="@drawable/help"/>
+                <TextView
+                    android:text="Feedback"
+                    android:textAppearance="?android:textAppearanceLarge"
+                    android:padding="10dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
             android:id="@+id/cvSignOut"
             android:clickable="true"
             android:onClick="onClickListener"

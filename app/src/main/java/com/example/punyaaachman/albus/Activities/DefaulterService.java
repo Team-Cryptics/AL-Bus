@@ -22,7 +22,6 @@ import com.example.punyaaachman.albus.POJO_Map.Distance;
 import com.example.punyaaachman.albus.POJO_Map.Element;
 import com.example.punyaaachman.albus.POJO_Map.MapData;
 import com.example.punyaaachman.albus.POJO_Map.Row;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,7 +52,8 @@ public class DefaulterService extends Service {
     MapInterface client;
     int distance;
 
-    List<Boolean> checks = new ArrayList<>(30);
+    Boolean checks [];
+
     int i;
 
     String BASE__URL = "https://maps.googleapis.com/";
@@ -62,20 +62,25 @@ public class DefaulterService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
+
+
         return null;
     }
 
     @Override
     public int onStartCommand(Intent intent,int flags, int startId) {
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference=firebaseDatabase.getReference();
 
+        checks = new Boolean[20];
         for(int j=0;j<20;j++) {
-            checks.get(j).equals(true);
+            checks[j]=true;
         }
 
         i=0;
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference=firebaseDatabase.getReference();
+
 
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         LocationListener listener = new OurDefaulterListener();
@@ -96,7 +101,7 @@ public class DefaulterService extends Service {
 
 
 
-        return START_STICKY;
+        return START_NOT_STICKY;
     }
 
 
@@ -116,32 +121,14 @@ public class DefaulterService extends Service {
 
             origin = lat + "," + lon; //Location of user
 
-            databaseReference.child("Bus app coordinates").addChildEventListener(new ChildEventListener() {
-                @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
+
+            databaseReference.child("Bus app coordinates").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
                     CoordinatesInfo coordinates = dataSnapshot.getValue(CoordinatesInfo.class);
                     destination = Double.toString(coordinates.getLat())+","+Double.toString(coordinates.getLon()); //Location of bus
                     Log.i("TAG","Location of bus "+ destination);
-
-                }
-
-                @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                    CoordinatesInfo coordinates = dataSnapshot.getValue(CoordinatesInfo.class);
-                    destination = Double.toString(coordinates.getLat())+","+Double.toString(coordinates.getLon()); //Location of bus
-                    Log.i("TAG","Location of bus "+ destination);
-                }
-
-                @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                }
-
-                @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
                 }
 
                 @Override
@@ -150,22 +137,8 @@ public class DefaulterService extends Service {
                 }
             });
 
-            }
-//                @Override
-//                public void onDataChange(DataSnapshot dataSnapshot) {
-//                    CoordinatesInfo coordinates = dataSnapshot.getValue(CoordinatesInfo.class);
-//                    destination = Double.toString(coordinates.getLat())+","+Double.toString(coordinates.getLon()); //Location of bus
-//                    Log.i("TAG","Location of bus "+ destination);
-//                }
-//
-//                @Override
-//                public void onCancelled(DatabaseError databaseError) {
-//
-//                }
-//            });
-
-          //  calculateDistance(origin, destination);
-        //}
+            calculateDistance(origin, destination);
+        }
 
         private void calculateDistance(String origin, String destination) {
 
@@ -192,7 +165,7 @@ public class DefaulterService extends Service {
                         if(i<20) {
 
                             if(distance<500) {
-                                checks.get(i).equals(false);
+                                checks[i].equals(false);
                             }
 
                             i++;
@@ -202,7 +175,7 @@ public class DefaulterService extends Service {
 
                             int countDefaulters=0;
                             for(int j=0;j<20;j++) {
-                                if(checks.get(j).equals(false)) {
+                                if(checks[j].equals(false)) {
                                     countDefaulters++;
                                 }
                             }
