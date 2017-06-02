@@ -288,7 +288,7 @@ public class HomeActivity extends AppCompatActivity {
                     dref.child("Profiles").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(profile);
                     findViewById(R.id.btnAddMoney).setVisibility(View.GONE);
                     findViewById(R.id.pbAddMoney).setVisibility(View.VISIBLE);
-
+                    //////////////////////////////////////
                     //add money
                     addMoney();
 
