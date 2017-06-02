@@ -29,10 +29,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCTOFU8cjyhfufwU7jwJjxzsjQ0hGCP_14" />
 
-        <activity android:name=".Activities.WebViewActivity">
 
-
-            </activity>
         <activity
             android:name=".Activities.SplashscreenActivity"
             android:theme="@style/Theme.Design.NoActionBar">
