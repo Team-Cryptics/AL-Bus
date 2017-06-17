@@ -32,10 +32,10 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCTOFU8cjyhfufwU7jwJjxzsjQ0hGCP_14" />
 
-        <activity android:name="CloudActivity">
+        <activity android:name=".Activities.CloudActivity">
 
         </activity>
-        <activity android:name="WebViewActivity">
+        <activity android:name=".Activities.WebViewActivity">
 
         </activity>
         <activity
