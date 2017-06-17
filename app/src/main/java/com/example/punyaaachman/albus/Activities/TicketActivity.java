@@ -55,7 +55,7 @@ public class TicketActivity extends AppCompatActivity {
 //        Intent serviceIntent = new Intent(this,DefaulterService.class);
 //        startService(serviceIntent);
 
-        startService(new Intent(TicketActivity.this, MapService.class));
+       // startService(new Intent(TicketActivity.this, MapService.class));
 
     }
 
