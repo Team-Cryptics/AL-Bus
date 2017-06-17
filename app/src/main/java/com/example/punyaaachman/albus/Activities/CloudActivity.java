@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.punyaaachman.albus.POJO.GlobalVariables;
 import com.example.punyaaachman.albus.R;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.AccountPicker;
@@ -53,6 +54,7 @@ public class CloudActivity extends AppCompatActivity {
     private ImageView selectedImage;
     private TextView resultTextView;
     Account mAccount;
+    Button bt1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +64,13 @@ public class CloudActivity extends AppCompatActivity {
                 .select_image_button);
         selectedImage = (ImageView) findViewById(R.id.selected_image);
         resultTextView = (TextView) findViewById(R.id.result);
-
+        bt1 = (Button)findViewById(R.id.button2);
+        bt1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CloudActivity.this, WebViewActivity.class ));
+            }
+        });
         selectImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -242,7 +250,9 @@ public class CloudActivity extends AppCompatActivity {
             for (EntityAnnotation landmark : landmarks) {
                 message.append(String.format(Locale.getDefault(), "%.3f: %s",
                         landmark.getScore(), landmark.getDescription()));
+                GlobalVariables.searchPlace = landmark.getDescription();
                 Log.i("TAG", landmark.getDescription());
+
                 message.append("\n");
 
                 }
@@ -296,7 +306,7 @@ public class CloudActivity extends AppCompatActivity {
         if (mAccount == null) {
             pickUserAccount();
         } else {
-            new com.sarthak.sarandev.cloudvisionapi.GetTokenTask(CloudActivity.this, mAccount, SCOPE, REQUEST_ACCOUNT_AUTHORIZATION)
+            new GetTokenTask(CloudActivity.this, mAccount, SCOPE, REQUEST_ACCOUNT_AUTHORIZATION)
                     .execute();
         }
     }

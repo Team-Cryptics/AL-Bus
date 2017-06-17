@@ -272,8 +272,8 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(HomeActivity.this, HelpActivity.class));
                 break;
             case R.id.cvCloud:
-                startActivity(new Intent());
-
+                startActivity(new Intent(HomeActivity.this, CloudActivity.class ));
+                break;
         //    case R.id.cvFeedback :
          //       startActivity(new Intent(HomeActivity.this,FeedbackActivity.class));
          //

@@ -15,6 +15,7 @@ public class GlobalVariables {
     public static double price;
     public static boolean isProfile;
     public static boolean isTicket;
+    public static String searchPlace;
 
 
 }

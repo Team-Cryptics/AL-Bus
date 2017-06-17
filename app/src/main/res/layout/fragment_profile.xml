@@ -217,28 +217,8 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:id="@+id/cvSignOut"
-            android:clickable="true"
-            android:onClick="onClickListener"
-            app:cardBackgroundColor="@color/colorPrimary"
-            android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:text="Sign Out"
-                android:padding="10dp"
-                android:textColor="@color/cardview_light_background"
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                android:textAppearance="?android:textAppearanceLarge"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
             android:id="@+id/cvCloud"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="0dp"
             app:cardElevation="5dp"
             android:clickable="true"
             android:onClick="onClickListener"
@@ -262,6 +242,27 @@
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cvSignOut"
+            android:clickable="true"
+            android:onClick="onClickListener"
+            app:cardBackgroundColor="@color/colorPrimary"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Sign Out"
+                android:padding="10dp"
+                android:textColor="@color/cardview_light_background"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+        </android.support.v7.widget.CardView>
+
     </LinearLayout>
 
 </ScrollView>
